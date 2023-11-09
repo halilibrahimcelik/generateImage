@@ -48,17 +48,48 @@ body::before {
   h3,
   h4,
   h5 {
-    font-family: var(--font-oswald) system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
+    font-family: var(--font-oswald);
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md xl:bg-red-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    @apply text-center uppercase transition-all ease-in duration-300 bg-[200%_auto] text-[white] shadow-[0_0_3px_#eee] block m-2.5 px-[45px] py-[15px] rounded-[10px] hover:bg-right;
+    background-image: linear-gradient(
+      to right,
+      #de6161 0%,
+      #6f22a5 51%,
+      #de6161 100%
+    );
   }
+
   .text {
     @apply font-poppins text-sm md:text-xl lg:text-2xl text-primary;
+  }
+
+  .gradient-box {
+    position: relative;
+    padding: 15px;
+    margin: 5px;
+    display: inline-block;
+  }
+
+  .gradient-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 3px; /* control the border thickness */
+    background: linear-gradient(
+      118deg,
+      rgba(211, 7, 7, 1) 0%,
+      rgba(186, 114, 17, 1) 43%,
+      rgb(39, 24, 255) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 }
