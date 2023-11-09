@@ -1,27 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  min-height: 100vh;
+  color: rgb(228 228 231);
+  background-color: rgb(10, 10, 10);
+  font-size: 18px;
 }
+body::before {
+  z-index: -1;
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  bottom: 0;
+  right: 0;
+  filter: blur(30px);
+  background: radial-gradient(circle at center, rgb(24 24 27), rgb(0, 0, 0));
+}
+.overlay {
+  --color-gradient-1: #7d7aff80;
+  --color-gradient-2: #2121e280;
+  --color-gradient-3: #fa313180;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      at 71% 77%,
+      var(--color-gradient-1) 0,
+      transparent 21%
+    ),
+    radial-gradient(at 36% 47%, var(--color-gradient-3) 0, transparent 50%),
+    radial-gradient(at 45% 51%, var(--color-gradient-1) 0, transparent 53%),
+    radial-gradient(at 73% 44%, var(--color-gradient-2) 0, transparent 54%),
+    radial-gradient(at 24% 10%, var(--color-gradient-2) 0, transparent 40%),
+    radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  filter: blur(44px);
+  z-index: -1;
+  opacity: 0.5;
+}
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-oswald) system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md xl:bg-red-400 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  }
+  .text {
+    @apply font-poppins text-sm md:text-xl lg:text-2xl text-primary;
+  }
 }
