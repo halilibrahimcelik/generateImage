@@ -49,7 +49,7 @@ const PromptTag = ({ onClick }: Props) => {
           >
             <button
               onClick={() => onClick && onClick(suggestion.title)}
-              className="group-hover:opacity-100 group-hover:brightness-200 text-left opacity-70  transition-all ease-in duration-300"
+              className="btn-copy"
             >
               {suggestion.title}
             </button>

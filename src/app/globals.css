@@ -39,7 +39,7 @@ body::before {
     radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
 
   filter: blur(44px);
-  z-index: -1;
+  z-index: -10;
   opacity: 0.5;
 }
 @layer base {
@@ -62,7 +62,9 @@ body::before {
       #de6161 100%
     );
   }
-
+  .btn-copy {
+    @apply group-hover:opacity-100 group-hover:brightness-200 text-left opacity-70  transition-all ease-in duration-300;
+  }
   .text {
     @apply font-poppins text-sm md:text-xl lg:text-2xl text-primary;
   }
@@ -92,4 +94,19 @@ body::before {
     mask-composite: exclude;
     pointer-events: none;
   }
+}
+
+.image-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(200, 10, 10, 0) 30%,
+    rgba(0, 0, 0, 0.8108149808995864) 100%
+  );
 }
