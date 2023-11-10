@@ -63,7 +63,11 @@ function ExampleImages() {
             />
             <h4 className="p-4 relative z-10">{example.prompt} </h4>
             <button
-              onClick={() => onClick && onClick(example.prompt)}
+              onClick={() =>
+                onClick &&
+                (onClick(example.prompt),
+                window.scrollTo({ top: 0, behavior: "smooth" }))
+              }
               className="btn-copy mx-4 mb-2  px-2 rounded-md w-fit bg-[rgba(0,0,0,0.3)]"
             >
               Copy

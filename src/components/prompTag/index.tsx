@@ -38,6 +38,10 @@ const SUGGESTIONS = [
 ];
 const PromptTag = () => {
   const { onClick } = useMainContext();
+  const handleClick = (query: string) => {
+    onClick(query);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <ul className="mt-10 flex flex-col xl:grid   xl:grid-cols-2   gap-2">
       {SUGGESTIONS.map((suggestion) => {
@@ -47,7 +51,7 @@ const PromptTag = () => {
             key={suggestion.id}
           >
             <button
-              onClick={() => onClick && onClick(suggestion.title)}
+              onClick={() => handleClick(suggestion.title)}
               className="btn-copy"
             >
               {suggestion.title}

@@ -4,6 +4,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 const initialState = {
   prompt: "",
   onClick: (query: string) => {},
+  generateImage: () => {},
 };
 export const MainContext = createContext(initialState);
 
@@ -23,7 +24,13 @@ export const MainProvider = ({ children }: Props) => {
   const onClick = (query: string) => {
     setPrompt(query);
   };
-  const contextValue = useMemo(() => ({ prompt, onClick }), [prompt]);
+  const generateImage = () => {
+    console.log("hello");
+  };
+  const contextValue = useMemo(
+    () => ({ prompt, onClick, generateImage }),
+    [prompt]
+  );
   return (
     <MainContext.Provider value={contextValue}>{children}</MainContext.Provider>
   );

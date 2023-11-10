@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 type Props = {};
 
 const Form = (props: Props) => {
-  const { onClick, prompt } = useMainContext();
+  const { onClick, prompt, generateImage } = useMainContext();
 
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -13,6 +13,7 @@ const Form = (props: Props) => {
     if (value?.trim() === "") return alert("Please enter a query");
     e.preventDefault();
     onClick(value!);
+    generateImage();
   };
   useEffect(() => {
     textRef.current!.value = prompt;
