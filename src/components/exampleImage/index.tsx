@@ -7,6 +7,7 @@ import example3 from "@/assets/example-3.png";
 import example4 from "@/assets/example-4.png";
 import example5 from "@/assets/example-5.png";
 import example6 from "@/assets/example-6.png";
+import { useMainContext } from "@/hooks/useMain";
 
 export const EXAMPLES = [
   {
@@ -44,11 +45,8 @@ export const EXAMPLES = [
   },
 ];
 
-type Props = {
-  onClick?: (query: string) => void;
-};
-
-function ExampleImages({ onClick }: Props) {
+function ExampleImages() {
+  const { onClick } = useMainContext();
   return (
     <ul className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-3">
       {EXAMPLES.map((example) => {

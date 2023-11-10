@@ -1,9 +1,7 @@
 "use client";
+import { useMainContext } from "@/hooks/useMain";
 import React from "react";
 
-type Props = {
-  onClick?: (query: string) => void;
-};
 const SUGGESTIONS = [
   {
     id: 1,
@@ -38,7 +36,8 @@ const SUGGESTIONS = [
     title: "2 medieval warriors",
   },
 ];
-const PromptTag = ({ onClick }: Props) => {
+const PromptTag = () => {
+  const { onClick } = useMainContext();
   return (
     <ul className="mt-10 flex flex-col xl:grid   xl:grid-cols-2   gap-2">
       {SUGGESTIONS.map((suggestion) => {
