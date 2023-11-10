@@ -1,17 +1,24 @@
 "use client";
-import React from "react";
+import { useMainContext } from "@/hooks/useMain";
+import React, { useEffect } from "react";
 
 type Props = {};
 
 const Form = (props: Props) => {
-  const [state, setState] = React.useState({});
+  const { onClick, prompt, generateImage } = useMainContext();
+
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
     if (value?.trim() === "") return alert("Please enter a query");
     e.preventDefault();
-    console.log(textRef.current?.value);
+    onClick(value!);
+    generateImage();
   };
+  useEffect(() => {
+    textRef.current!.value = prompt;
+    console.log(prompt);
+  }, [prompt]);
   return (
     <div className="w-full rounded-md gradient-box ">
       <form

@@ -1,9 +1,7 @@
 "use client";
+import { useMainContext } from "@/hooks/useMain";
 import React from "react";
 
-type Props = {
-  onClick?: (query: string) => void;
-};
 const SUGGESTIONS = [
   {
     id: 1,
@@ -38,7 +36,12 @@ const SUGGESTIONS = [
     title: "2 medieval warriors",
   },
 ];
-const PromptTag = ({ onClick }: Props) => {
+const PromptTag = () => {
+  const { onClick } = useMainContext();
+  const handleClick = (query: string) => {
+    onClick(query);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <ul className="mt-10 flex flex-col xl:grid   xl:grid-cols-2   gap-2">
       {SUGGESTIONS.map((suggestion) => {
@@ -48,8 +51,8 @@ const PromptTag = ({ onClick }: Props) => {
             key={suggestion.id}
           >
             <button
-              onClick={() => onClick && onClick(suggestion.title)}
-              className="group-hover:opacity-100 group-hover:brightness-200 text-left opacity-70  transition-all ease-in duration-300"
+              onClick={() => handleClick(suggestion.title)}
+              className="btn-copy"
             >
               {suggestion.title}
             </button>
