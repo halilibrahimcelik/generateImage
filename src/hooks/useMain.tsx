@@ -24,8 +24,19 @@ export const MainProvider = ({ children }: Props) => {
   const onClick = (query: string) => {
     setPrompt(query);
   };
-  const generateImage = () => {
-    console.log("hello");
+  const generateImage = async () => {
+    try {
+      await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+    } catch (error) {
+      console.log(error);
+      throw new Error("Something went wrong failed to generate image");
+    }
   };
   const contextValue = useMemo(
     () => ({ prompt, onClick, generateImage }),
