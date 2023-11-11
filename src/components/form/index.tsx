@@ -1,12 +1,13 @@
 "use client";
 import { useMainContext } from "@/hooks/useMain";
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 const Form = (props: Props) => {
-  const { onClick, prompt, generateImage } = useMainContext();
-
+  const { onClick, prompt, generateImage, loading } = useMainContext();
+  console.log(loading);
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
@@ -14,6 +15,11 @@ const Form = (props: Props) => {
     e.preventDefault();
     onClick(value!);
     generateImage();
+    toast.promise(generateImage, {
+      pending: "Your image is being generated 🤔",
+      success: "Yay, image has been rendered 🥳",
+      error: "Unfortunately, there has been an eror, please try again 😢",
+    });
   };
   useEffect(() => {
     textRef.current!.value = prompt;
