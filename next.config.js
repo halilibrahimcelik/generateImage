@@ -7,6 +7,13 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "replicate.delivery",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

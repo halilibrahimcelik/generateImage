@@ -3,6 +3,7 @@ import "./globals.css";
 import { oswald, poppin } from "@/lib/fonts";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Generate Image",

@@ -1,12 +1,16 @@
 "use client";
 import { createContext, useContext, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
 const initialState = {
   prompt: "",
   onClick: (query: string) => {},
   error: "",
   generateImage: () => {},
-  prediction: "",
+  prediction: {
+    output: [],
+  },
+  loading: false,
 };
 export const MainContext = createContext(initialState);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -24,25 +28,13 @@ type Props = {
 export const MainProvider = ({ children }: Props) => {
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState("");
-  const [prediction, setPrediction] = useState("");
+  const [loading, setLoading] = useState(initialState.loading);
+  const [prediction, setPrediction] = useState(initialState.prediction);
 
   const onClick = (query: string) => {
     setPrompt(query);
   };
   const generateImage = async () => {
-    // try {
-    //   await fetch("/api/generate", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ prompt }),
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    //   throw new Error("Something went wrong failed to generate image");
-    // }
-
     try {
       const response = await fetch("/api/predictions", {
         method: "POST",
@@ -54,7 +46,7 @@ export const MainProvider = ({ children }: Props) => {
         }),
       });
       let prediction = await response.json();
-
+      setLoading(true);
       if (response.status !== 201) {
         setError(prediction.detail);
       }
@@ -71,16 +63,46 @@ export const MainProvider = ({ children }: Props) => {
           return;
         }
         console.log({ prediction });
-        setPrediction(prediction);
+        if (prediction.status === "succeeded") {
+          setLoading(false);
+          setPrediction(prediction);
+        }
       }
+
+      await toast.promise(
+        () => {
+          if (prediction.status === "succeeded") {
+            return Promise.resolve("Image generated successfully!");
+          } else {
+            return Promise.reject("Image generation failed");
+          }
+        },
+        {
+          success: {
+            render: ({ data }) => (
+              <span role="img" aria-label="success">
+                ✅ {data}
+              </span>
+            ),
+          },
+          error: {
+            render: ({ data }) => (
+              <span role="img" aria-label="error">
+                ❌ {"Something went wrong, failed to generate image"}
+              </span>
+            ),
+            icon: "❌",
+          },
+        }
+      );
     } catch (error) {
-      throw new Error("Something went wrong failed to generate image");
+      toast.error("Something went wrong, failed to generate image");
     }
   };
   const contextValue = useMemo(
-    () => ({ prompt, onClick, generateImage, error, prediction }),
+    () => ({ prompt, onClick, generateImage, error, prediction, loading }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [prompt]
+    [prompt, error, prediction]
   );
   return (
     <MainContext.Provider value={contextValue}>{children}</MainContext.Provider>
