@@ -16,9 +16,9 @@ const Form = (props: Props) => {
     onClick(value!);
     generateImage();
     toast.promise(generateImage, {
-      pending: "Promise is pending",
-      success: "Promise resolved 👌",
-      error: "Promise rejected 🤯",
+      pending: "Your image is being generated 🤔",
+      success: "Yay, image has been rendered 🥳",
+      error: "Unfortunately, there has been an eror, please try again 😢",
     });
   };
   useEffect(() => {

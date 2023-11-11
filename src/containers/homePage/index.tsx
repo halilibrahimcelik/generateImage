@@ -21,7 +21,18 @@ const HomePageContainer = (props: Props) => {
         <ExampleImages />
         <div className="overlay" />
       </MainProvider>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </Wrapper>
   );
 };

@@ -1,7 +1,6 @@
 "use client";
 import { useMainContext } from "@/hooks/useMain";
 import React from "react";
-
 const SUGGESTIONS = [
   {
     id: 1,
@@ -42,6 +41,7 @@ const PromptTag = () => {
     onClick(query);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return (
     <ul className="mt-10 flex flex-col xl:grid   xl:grid-cols-2   gap-2">
       {SUGGESTIONS.map((suggestion) => {

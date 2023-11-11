@@ -6,7 +6,7 @@ const initialState = {
   prompt: "",
   onClick: (query: string) => {},
   error: "",
-  generateImage: () => {},
+  generateImage: async () => {},
   prediction: {
     output: [],
   },
@@ -68,35 +68,10 @@ export const MainProvider = ({ children }: Props) => {
           setPrediction(prediction);
         }
       }
-
-      await toast.promise(
-        () => {
-          if (prediction.status === "succeeded") {
-            return Promise.resolve("Image generated successfully!");
-          } else {
-            return Promise.reject("Image generation failed");
-          }
-        },
-        {
-          success: {
-            render: ({ data }) => (
-              <span role="img" aria-label="success">
-                ✅ {data}
-              </span>
-            ),
-          },
-          error: {
-            render: ({ data }) => (
-              <span role="img" aria-label="error">
-                ❌ {"Something went wrong, failed to generate image"}
-              </span>
-            ),
-            icon: "❌",
-          },
-        }
-      );
     } catch (error) {
-      toast.error("Something went wrong, failed to generate image");
+      toast.error("Something went wrong, failed to generate image", {
+        theme: "dark",
+      });
     }
   };
   const contextValue = useMemo(
