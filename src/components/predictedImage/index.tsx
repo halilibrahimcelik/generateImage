@@ -12,7 +12,6 @@ type Props = {};
 const PredictedImage = (props: Props) => {
   const { prediction } = useMainContext();
   const [toggler, setToggler] = React.useState(false);
-  console.log(prediction?.output);
   const handleDownload = () => {
     const imageUrl = `${prediction?.output[0]}`; // Replace with the actual image URL
 
@@ -32,7 +31,10 @@ const PredictedImage = (props: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-3 grid-rows-1 mt-20 items-center justify-center">
+    <div
+      id="generated-image"
+      className="grid grid-cols-1 gap-3 grid-rows-1 mt-20 items-center justify-center"
+    >
       <h2 className="text-2xl">Generated Image</h2>
       <div className="relative mx-auto">
         <Image

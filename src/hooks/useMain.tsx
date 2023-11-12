@@ -11,6 +11,7 @@ const initialState = {
     output: [],
   },
   loading: false,
+  setLoading: (loading: boolean) => {},
 };
 export const MainContext = createContext(initialState);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -30,12 +31,13 @@ export const MainProvider = ({ children }: Props) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(initialState.loading);
   const [prediction, setPrediction] = useState(initialState.prediction);
-
+  console.log(loading);
   const onClick = (query: string) => {
     setPrompt(query);
   };
   const generateImage = async () => {
     try {
+      setLoading(true);
       const response = await fetch("/api/predictions", {
         method: "POST",
         headers: {
@@ -46,7 +48,7 @@ export const MainProvider = ({ children }: Props) => {
         }),
       });
       let prediction = await response.json();
-      setLoading(true);
+
       if (response.status !== 201) {
         setError(prediction.detail);
       }
@@ -66,6 +68,10 @@ export const MainProvider = ({ children }: Props) => {
         if (prediction.status === "succeeded") {
           setLoading(false);
           setPrediction(prediction);
+          const imageDiv = document.getElementById("generated-image")!;
+          setTimeout(() => {
+            if (imageDiv) imageDiv.scrollIntoView({ behavior: "smooth" });
+          }, 100);
         }
       }
     } catch (error) {
@@ -75,9 +81,17 @@ export const MainProvider = ({ children }: Props) => {
     }
   };
   const contextValue = useMemo(
-    () => ({ prompt, onClick, generateImage, error, prediction, loading }),
+    () => ({
+      prompt,
+      onClick,
+      generateImage,
+      error,
+      prediction,
+      loading,
+      setLoading,
+    }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [prompt, error, prediction]
+    [prompt, error, prediction, loading, setLoading, onClick]
   );
   return (
     <MainContext.Provider value={contextValue}>{children}</MainContext.Provider>

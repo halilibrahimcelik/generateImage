@@ -36,10 +36,8 @@ export default async function handler(req: any, res: any) {
   }
   const predictions = await startGeneration(prompt);
   let generatedImage;
-  console.log("test");
   while (!generatedImage) {
     const result = await getGeneration(predictions.id);
-    console.log(result);
     if (result.status === "succeeded") {
       [generatedImage] = result.output;
     } else if (result.status === "starting") {
