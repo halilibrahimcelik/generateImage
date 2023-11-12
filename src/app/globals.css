@@ -39,7 +39,7 @@ body::before {
     radial-gradient(at 76% 46%, var(--color-gradient-1) 0, transparent 50%);
 
   filter: blur(44px);
-  z-index: -10;
+  z-index: -1;
   opacity: 0.5;
 }
 @layer base {
