@@ -31,7 +31,6 @@ export const MainProvider = ({ children }: Props) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(initialState.loading);
   const [prediction, setPrediction] = useState(initialState.prediction);
-  console.log(loading);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onClick = (query: string) => {
     setPrompt(query);
@@ -65,7 +64,6 @@ export const MainProvider = ({ children }: Props) => {
           setError(prediction.detail);
           return;
         }
-        console.log({ prediction });
         if (prediction.status === "succeeded") {
           setLoading(false);
           setPrediction(prediction);
