@@ -6,14 +6,15 @@ import { toast } from "react-toastify";
 type Props = {};
 
 const Form = (props: Props) => {
-  const { onClick, prompt, generateImage, loading } = useMainContext();
-  console.log(loading);
+  const { onClick, prompt, generateImage, setLoading, loading } =
+    useMainContext();
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
-    if (value?.trim() === "") return alert("Please enter a query");
+    if (value?.trim() === "") return toast.warning("Please enter a query");
     e.preventDefault();
     onClick(value!);
+    setLoading(true);
     generateImage();
     toast.promise(generateImage, {
       pending: "Your image is being generated 🤔",
@@ -23,7 +24,6 @@ const Form = (props: Props) => {
   };
   useEffect(() => {
     textRef.current!.value = prompt;
-    console.log(prompt);
   }, [prompt]);
   return (
     <div className="w-full rounded-md gradient-box ">

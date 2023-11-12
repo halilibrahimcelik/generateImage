@@ -4,23 +4,37 @@ import Form from "@/components/form";
 import PredictedImage from "@/components/predictedImage";
 import PromptTag from "@/components/prompTag";
 import Wrapper from "@/components/wrapper";
-import { MainProvider, useMainContext } from "@/hooks/useMain";
-import React from "react";
+import { useMainContext } from "@/hooks/useMain";
+import React, { useEffect } from "react";
+import { PuffLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 
 type Props = {};
 
 const HomePageContainer = (props: Props) => {
   const { loading } = useMainContext();
+
   return (
     <Wrapper tag="section">
-      <MainProvider>
-        <Form />
-        <PromptTag />
-        {loading ? <></> : <PredictedImage />}
-        <ExampleImages />
-        <div className="overlay" />
-      </MainProvider>
+      <Form />
+      <PromptTag />
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <PuffLoader
+            size={100}
+            cssOverride={{
+              animation: "ease-in",
+              backgroundColor: "transparent",
+            }}
+            color="#e3e3e3"
+          />
+        </div>
+      ) : (
+        <PredictedImage />
+      )}
+      <ExampleImages />
+      <div className="overlay" />
+
       <ToastContainer
         position="top-right"
         autoClose={5000}
