@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const metadata: Metadata = {
   title: "Generate Image",
   description: "Generate your an image with your mind !",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
