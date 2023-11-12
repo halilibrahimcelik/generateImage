@@ -34,20 +34,22 @@ export default async function handler(req: any, res: any) {
   if (!prompt) {
     res.status(400).json("No promt provided");
   }
-  const predictions = await startGeneration(prompt);
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  // const predictions = await startGeneration(prompt);
   let generatedImage;
-  while (!generatedImage) {
-    const result = await getGeneration(predictions.id);
-    if (result.status === "succeeded") {
-      [generatedImage] = result.output;
-    } else if (result.status === "starting") {
-      console.log("starting....");
-    } else if (result.status === "failed") {
-      break;
-    } else {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
-  }
+  // while (!generatedImage) {
+  //   const result = await getGeneration(predictions.id);
+  //   if (result.status === "succeeded") {
+  //     [generatedImage] = result.output;
+  //   } else if (result.status === "starting") {
+  //     console.log("starting....");
+  //   } else if (result.status === "failed") {
+  //     break;
+  //   } else {
+  //     await new Promise((resolve) => setTimeout(resolve, 1000));
+  //   }
+  // }
   res
     .status(200)
     .json(generatedImage ? generatedImage : "Failed to generate an image");

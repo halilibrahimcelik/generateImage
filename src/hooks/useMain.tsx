@@ -32,6 +32,7 @@ export const MainProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState(initialState.loading);
   const [prediction, setPrediction] = useState(initialState.prediction);
   console.log(loading);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onClick = (query: string) => {
     setPrompt(query);
   };

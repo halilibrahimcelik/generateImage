@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
+    "express-rate-limit": "^7.1.4",
+    "express-slow-down": "^2.0.0",
     "file-saver": "^2.0.5",
     "fslightbox-react": "^1.7.6",
     "next": "14.0.1",
