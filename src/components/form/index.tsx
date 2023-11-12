@@ -7,7 +7,6 @@ type Props = {};
 
 const Form = (props: Props) => {
   const { onClick, prompt, generateImage, loading } = useMainContext();
-  console.log(loading);
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;

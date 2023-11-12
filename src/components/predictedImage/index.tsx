@@ -28,7 +28,7 @@ const PredictedImage = (props: Props) => {
       });
   };
   if (prediction?.output.length === 0) {
-    return <></>;
+    return null;
   }
 
   return (
