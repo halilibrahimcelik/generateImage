@@ -2,6 +2,7 @@
 import ExampleImages from "@/components/exampleImage";
 import Form from "@/components/form";
 import PredictedImage from "@/components/predictedImage";
+import PredictLoading from "@/components/predictedImage/loading";
 import PromptTag from "@/components/prompTag";
 import Wrapper from "@/components/wrapper";
 import { useMainContext } from "@/hooks/useMain";
@@ -19,7 +20,7 @@ const HomePageContainer = (props: Props) => {
       <Form />
       <PromptTag />
       {loading ? (
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-2">
           <PuffLoader
             size={100}
             cssOverride={{
@@ -28,6 +29,7 @@ const HomePageContainer = (props: Props) => {
             }}
             color="#e3e3e3"
           />
+          <PredictLoading />
         </div>
       ) : (
         <PredictedImage />

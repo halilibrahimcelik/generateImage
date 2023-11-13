@@ -64,6 +64,7 @@ export const MainProvider = ({ children }: Props) => {
           setError(prediction.detail);
           return;
         }
+        console.log({ prediction });
         if (prediction.status === "succeeded") {
           setLoading(false);
           setPrediction(prediction);
