@@ -14,7 +14,7 @@ const Form = (props: Props) => {
     if (value?.trim() === "") return toast.warning("Please enter a query");
     e.preventDefault();
     onClick(value!);
-    setLoading(true);
+
     generateImage();
     toast.promise(generateImage, {
       pending: "Your image is being generated 🤔",
