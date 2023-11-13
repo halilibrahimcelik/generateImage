@@ -2,7 +2,7 @@
 import { useMainContext } from "@/hooks/useMain";
 import FsLightbox from "fslightbox-react";
 
-import React from "react";
+import React, { useEffect } from "react";
 import PreviewSvg from "@/assets/preview.svg";
 import Image from "next/image";
 import { saveAs } from "file-saver";
@@ -12,8 +12,9 @@ type Props = {};
 const PredictedImage = (props: Props) => {
   const { prediction } = useMainContext();
   const [toggler, setToggler] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const handleDownload = () => {
-    const imageUrl = `${prediction?.output[0]}`; // Replace with the actual image URL
+    const imageUrl = `${prediction?.output[0]}`;
 
     // Fetch the image as a blob
     fetch(imageUrl)
@@ -26,7 +27,19 @@ const PredictedImage = (props: Props) => {
         console.error("Error downloading image:", error);
       });
   };
-  if (prediction?.output.length === 0) {
+  let timer: any;
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    timer = setTimeout(() => {
+      if (prediction?.output.length > 0) {
+        setLoading(true);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  if (!loading) {
     return null;
   }
 
@@ -42,6 +55,8 @@ const PredictedImage = (props: Props) => {
           alt="Picture of the author"
           width={500}
           height={500}
+          placeholder="blur"
+          blurDataURL={`${prediction?.output[0]}`}
           className="w-full h-full rounded-md aspect-[2/1] object-cover  xl:w-[50rem]  "
         />
         <span

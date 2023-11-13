@@ -39,7 +39,15 @@ const Form = (props: Props) => {
           ref={textRef}
           required
         ></textarea>
-        <button className="btn-primary" type="submit">
+        <button
+          className={`btn-primary ${
+            loading
+              ? "pointer-events-none  grayscale opacity-50"
+              : "opacity-100 grayscale-0"
+          }`}
+          type="submit"
+          disabled={loading}
+        >
           Generate
         </button>
       </form>
