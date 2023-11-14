@@ -11,12 +11,12 @@ const Form = (props: Props) => {
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
+    console.log(value);
     if (value?.trim() === "") return toast.warning("Please enter a query");
     e.preventDefault();
     onClick(value!);
-    setLoading(true);
-    generateImage();
-    toast.promise(generateImage, {
+
+    toast.promise(generateImage(value!), {
       pending: "Your image is being generated 🤔",
       success: "Yay, image has been rendered 🥳",
       error: "Unfortunately, there has been an eror, please try again 😢",

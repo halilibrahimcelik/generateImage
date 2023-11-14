@@ -2,8 +2,9 @@
 import { useMainContext } from "@/hooks/useMain";
 import FsLightbox from "fslightbox-react";
 
-import React, { useEffect } from "react";
+import React from "react";
 import PreviewSvg from "@/assets/preview.svg";
+import placeholderImage from "@/assets/example-1.png";
 import Image from "next/image";
 import { saveAs } from "file-saver";
 
@@ -27,19 +28,8 @@ const PredictedImage = (props: Props) => {
         console.error("Error downloading image:", error);
       });
   };
-  let timer: any;
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    timer = setTimeout(() => {
-      if (prediction?.output.length > 0) {
-        setLoading(true);
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-  if (!loading) {
+  if (prediction?.output.length === 0) {
     return null;
   }
 
@@ -49,19 +39,25 @@ const PredictedImage = (props: Props) => {
       className="grid grid-cols-1 gap-3 grid-rows-1 mt-20 items-center justify-center"
     >
       <h2 className="text-2xl">Generated Image</h2>
-      <div className="relative mx-auto group">
-        <Image
-          src={`${prediction?.output[0]}`}
-          alt="Picture of the author"
-          width={500}
-          height={500}
-          placeholder="blur"
-          blurDataURL={`${prediction?.output[0]}`}
-          className="w-full h-full rounded-md aspect-[2/1] object-cover  xl:w-[50rem]  "
-        />
+      <div className="relative mx-auto ">
+        <div className="w-full h-[500px] xl:w-[50rem]">
+          <Image
+            src={`${prediction?.output[0]}`}
+            alt="Picture of the author"
+            width={500}
+            height={500}
+            placeholder="blur"
+            blurDataURL={`${prediction?.output[0] || placeholderImage}`}
+            onLoadingComplete={(image) =>
+              image.classList.remove("opacity-0", "z-0")
+            }
+            className="w-full h-full rounded-md aspect-[2/1]  relative z-100  object-cover opacity-0 duration-[2s] transition-opacity  xl:w-[50rem]  "
+          />
+        </div>
         <span
+          id="preview-icon"
           onClick={() => setToggler(!toggler)}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer opacity-50  hover:opacity-100  ease-in duration-300 transition-opacity         
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer  opacity-50  hover:opacity-100  ease-in duration-300 transition-opacity         
           "
         >
           <PreviewSvg />

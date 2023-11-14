@@ -6,7 +6,7 @@ const initialState = {
   prompt: "",
   onClick: (query: string) => {},
   error: "",
-  generateImage: async () => {},
+  generateImage: async (value: string) => {},
   prediction: {
     output: [],
   },
@@ -35,7 +35,8 @@ export const MainProvider = ({ children }: Props) => {
   const onClick = (query: string) => {
     setPrompt(query);
   };
-  const generateImage = async () => {
+  const generateImage = async (value: string) => {
+    console.log("test", value);
     try {
       setLoading(true);
       const response = await fetch("/api/predictions", {
@@ -44,15 +45,13 @@ export const MainProvider = ({ children }: Props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt,
+          prompt: value,
         }),
       });
       let prediction = await response.json();
-
       if (response.status !== 201) {
         setError(prediction.detail);
       }
-
       while (
         prediction.status !== "succeeded" &&
         prediction.status !== "failed"
