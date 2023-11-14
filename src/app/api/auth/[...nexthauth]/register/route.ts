@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export default async function POST(request: Request) {
-  const emailSchema = z.string().email();
+  const emailSchema = z.string().email({ message: "Invalid email format" });
   const passwordSchema = z.string().min(4).max(100);
   try {
     const { email, password } = await request.json();
