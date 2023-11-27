@@ -36,7 +36,6 @@ export const MainProvider = ({ children }: Props) => {
     setPrompt(query);
   };
   const generateImage = async (value: string) => {
-    console.log("test", value);
     try {
       setLoading(true);
       const response = await fetch("/api/predictions", {
@@ -63,7 +62,6 @@ export const MainProvider = ({ children }: Props) => {
           setError(prediction.detail);
           return;
         }
-        console.log({ prediction });
         if (prediction.status === "succeeded") {
           setLoading(false);
           setPrediction(prediction);

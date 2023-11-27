@@ -11,7 +11,6 @@ const Form = (props: Props) => {
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
-    console.log(value);
     if (value?.trim() === "") return toast.warning("Please enter a query");
     e.preventDefault();
     onClick(value!);

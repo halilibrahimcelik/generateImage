@@ -1,6 +1,11 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcrypt";
+import { sql } from "@vercel/postgres";
 export const option: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -10,24 +15,23 @@ export const option: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-        const res = await fetch("/your/endpoint", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-        const user = await res.json();
-
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
+        const response = await sql`
+          SELECT * FROM users WHERE email=${credentials?.email}
+        `;
+        const user = response.rows[0];
+        const passwordCheck = await compare(
+          credentials?.password!,
+          user?.password
+        );
+        console.log({ user, passwordCheck });
+        if (passwordCheck) {
+          return {
+            id: user?.id,
+            email: user?.email,
+          };
         }
-        // Return null if user data could not be retrieved
+        console.log({ credentials });
+
         return null;
       },
     }),

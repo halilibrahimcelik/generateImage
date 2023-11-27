@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { hash } from "bcrypt";
+import { sql } from "@vercel/postgres";
 
 export async function POST(request: Request) {
   const emailSchema = z.string().email({ message: "Invalid email format" });
@@ -16,7 +17,6 @@ export async function POST(request: Request) {
 
     try {
       passwordSchema.parse(password);
-      const hassPassword = await hash(password, 10);
       console.log();
     } catch (passwordError) {
       return new Response(
@@ -25,6 +25,11 @@ export async function POST(request: Request) {
       );
     }
     console.log({ email, password });
+    const hassPassword = await hash(password, 10);
+
+    const response = await sql`
+    INSERT INTO users (email, password) VALUES (${email}, ${hassPassword})
+    `;
   } catch (error) {
     console.log({ error });
   }
