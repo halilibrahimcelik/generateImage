@@ -15,6 +15,7 @@ function Wrapper({ children, tag = "div", customClass }: Props) {
       }`}
     >
       {children}
+      <div className="overlay" />
     </Element>
   );
 }
