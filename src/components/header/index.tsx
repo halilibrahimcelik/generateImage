@@ -9,7 +9,8 @@ type Props = {};
 
 function Header({}: Props) {
   const pathname = usePathname();
-
+  const active = "after:scale-100";
+  const inactive = "after:scale-0";
   return (
     <header>
       <Wrapper tag="nav" customClass="py-[50px]">
@@ -22,10 +23,22 @@ function Header({}: Props) {
             </h1>
           </li>
           <li className="flex gap-4">
-            <Link className="font-medium" href={"/about"}>
+            <Link
+              className={`font-medium relative after:content-['']  after:absolute after:w-full after:h-[2px] after:transition-all after:duration-200 after:ease-in  ${
+                pathname === "/about" ? active : inactive
+              }    after:left-0 after:right-0 after:top-[24px] after:bg-white hover:after:scale-50`}
+              href={"/about"}
+            >
               About
             </Link>
-            <Link href={"/sign-in"}>Sign-in</Link>
+            <Link
+              className={`font-medium relative after:content-['']  after:absolute after:w-full after:h-[2px] after:transition-all after:duration-200 after:ease-in  ${
+                pathname === "/sign-in" ? active : inactive
+              }    after:left-0 after:right-0 after:top-[24px] after:bg-white hover:after:scale-50`}
+              href={"/sign-in"}
+            >
+              Sign-in
+            </Link>
           </li>
         </ul>
         <p className="text mt-10">
