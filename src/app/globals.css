@@ -22,7 +22,7 @@ body::before {
   --color-gradient-1: #7d7aff80;
   --color-gradient-2: #2121e280;
   --color-gradient-3: #fa313180;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -40,7 +40,7 @@ body::before {
 
   filter: blur(44px);
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 @layer base {
   h1,

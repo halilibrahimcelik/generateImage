@@ -35,7 +35,6 @@ const HomePageContainer = (props: Props) => {
         <PredictedImage />
       )}
       <ExampleImages />
-      <div className="overlay" />
 
       <ToastContainer
         position="top-right"
