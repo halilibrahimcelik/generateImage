@@ -17,21 +17,21 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 w-[40rem] lg:w-[50rem]"
+      className="flex flex-col gap-4 w-[40rem] lg:w-[50rem]"
     >
       <input
-        className="text-black p-1 rounded-md"
+        className="text-black px-1 py-2  rounded-md"
         placeholder="Email..."
         type="email"
         name="email"
       />
       <input
-        className="text-black p-1 rounded-md"
+        className="text-black  px-1 py-2 rounded-md"
         placeholder="Password..."
         type="password"
         name="password"
       />
-      <button type="submit" className="btn-primary p-1 mx-auto w-fit">
+      <button type="submit" className="btn-primary px-6 py-1 mx-auto w-fit">
         Login
       </button>
     </form>
