@@ -15,9 +15,9 @@ export async function POST(request: Request) {
     passwordSchema.parse(password);
     const hassPassword = await hash(password, 10);
 
-    // const response = await sql`
-    // INSERT INTO users (email, password) VALUES (${email}, ${hassPassword})
-    // `;
+    const response = await sql`
+    INSERT INTO users (email, password) VALUES (${email}, ${hassPassword})
+    `;
   } catch (error) {
     return NextResponse.json(error, { status: 400 });
   }

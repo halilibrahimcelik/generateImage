@@ -1,14 +1,13 @@
-"use client";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 import Wrapper from "../wrapper";
 import Link from "next/link";
 import logo from "@/assets/logo-small.png";
+import AuthSession from "./authSession";
 type Props = {};
 
 function Header({}: Props) {
-  const pathname = usePathname();
+  const pathname = false;
   const active = "after:scale-100";
   const inactive = "after:scale-0";
   return (
@@ -41,20 +40,13 @@ function Header({}: Props) {
           <li className="flex gap-4 ">
             <Link
               className={`font-medium relative after:content-[''] opacity-100 hover:opacity-70  transition-opacity ease-in duration-200  after:absolute after:w-full after:h-[2px] after:transition-all after:duration-200 after:ease-in  ${
-                pathname === "/about" ? active : inactive
+                pathname === false ? active : inactive
               }    after:left-0 after:right-0 after:top-[24px] after:bg-white hover:after:scale-50`}
               href={"/about"}
             >
               About
             </Link>
-            <Link
-              className={`font-medium  pacity-100 hover:opacity-70  transition-opacity ease-in duration-200 relative after:content-['']  after:absolute after:w-full after:h-[2px] after:transition-all after:duration-200 after:ease-in  ${
-                pathname === "/login" ? active : inactive
-              }    after:left-0 after:right-0 after:top-[24px] after:bg-white hover:after:scale-50`}
-              href={"/login"}
-            >
-              Sign-in
-            </Link>
+            <AuthSession />
           </li>
         </ul>
         <p className="text mt-10">

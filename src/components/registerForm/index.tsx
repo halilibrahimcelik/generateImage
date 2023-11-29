@@ -37,7 +37,8 @@ const RegisterForm = (props: Props) => {
 
           if (res.status === 200) {
             toast.onChange((e) => {
-              e.status === "removed" && router.push("/");
+              if (e.status === "removed" && res.status === 200)
+                router.push("/");
             });
           }
         });

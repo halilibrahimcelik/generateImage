@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import { signIn } from "next-auth/react";
-
+import { toast } from "react-toastify";
+import { toastConfig } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 const LoginForm = () => {
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -11,6 +14,26 @@ const LoginForm = () => {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
       redirect: false,
+    }).then((res) => {
+      if (!res?.ok) {
+        toast(<p>Invalid Creditenials</p>, {
+          type: "error",
+          pauseOnHover: true,
+          ...toastConfig,
+        });
+      } else if (res.status === 200) {
+        toast(<p>Welcome Back 👋</p>, {
+          type: "success",
+          pauseOnHover: true,
+          ...toastConfig,
+        });
+        toast.onChange((e) => {
+          if (e.status === "removed" && res.status === 200) {
+            router.push("/");
+            router.refresh();
+          }
+        });
+      }
     });
     console.log({ response });
   };
