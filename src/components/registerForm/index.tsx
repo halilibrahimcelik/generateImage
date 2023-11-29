@@ -2,9 +2,12 @@
 import React from "react";
 import { ZodError } from "zod";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { toastConfig } from "@/lib/utils";
 type Props = {};
 
 const RegisterForm = (props: Props) => {
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -19,12 +22,24 @@ const RegisterForm = (props: Props) => {
       if (!res.ok) {
         return res.json().then((data: ZodError) => {
           console.log(data.issues[0].message);
-          toast.error(data.issues[0].message);
+          toast(data.issues[0].message, { ...toastConfig, type: "error" });
         });
       } else {
         return res.json().then((data) => {
           console.log(data);
-          toast.success(data?.message);
+          toast(
+            <div className="w-full">
+              <p className="font-xl">{data.message}</p>
+              <p>Redirecting to home page</p>
+            </div>,
+            { ...toastConfig, type: "success" }
+          );
+
+          if (res.status === 200) {
+            toast.onChange((e) => {
+              e.status === "removed" && router.push("/");
+            });
+          }
         });
       }
     });

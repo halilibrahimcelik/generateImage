@@ -12,7 +12,7 @@ const RegisterContainer = async (props: Props) => {
 
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={10000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
