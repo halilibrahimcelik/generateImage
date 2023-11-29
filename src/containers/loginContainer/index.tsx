@@ -2,6 +2,7 @@ import React from "react";
 import Wrapper from "@/components/wrapper";
 import LoginForm from "@/components/loginForm";
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
 type Props = {};
 
 const LoginContainer = (props: Props) => {
@@ -14,6 +15,19 @@ const LoginContainer = (props: Props) => {
           Sign up
         </Link>
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </Wrapper>
   );
 };

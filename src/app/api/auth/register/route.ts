@@ -22,5 +22,8 @@ export async function POST(request: Request) {
     return NextResponse.json(error, { status: 400 });
   }
 
-  return NextResponse.json({ message: "success" });
+  return NextResponse.json(
+    { message: "You have succesfully registered!" },
+    { status: 200 }
+  );
 }

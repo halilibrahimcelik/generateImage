@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { ZodError } from "zod";
-
+import { toast } from "react-toastify";
 type Props = {};
 
 const RegisterForm = (props: Props) => {
@@ -9,17 +9,22 @@ const RegisterForm = (props: Props) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     console.log(formData.get("email"), formData.get("password"));
-
-    const response = await fetch("/api/auth/register", {
+    await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({
         email: formData.get("email"),
         password: formData.get("password"),
       }),
-    }).then((res) => {
+    }).then(async (res) => {
       if (!res.ok) {
         return res.json().then((data: ZodError) => {
           console.log(data.issues[0].message);
+          toast.error(data.issues[0].message);
+        });
+      } else {
+        return res.json().then((data) => {
+          console.log(data);
+          toast.success(data?.message);
         });
       }
     });
