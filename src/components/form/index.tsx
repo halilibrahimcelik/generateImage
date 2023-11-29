@@ -2,24 +2,33 @@
 import { useMainContext } from "@/hooks/useMain";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-
+import { useSession } from "next-auth/react";
+import { toastConfig } from "@/lib/utils";
 type Props = {};
 
 const Form = (props: Props) => {
   const { onClick, prompt, generateImage, setLoading, loading } =
     useMainContext();
+  const { data: session, status } = useSession();
+  console.log(status);
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
     if (value?.trim() === "") return toast.warning("Please enter a query");
     e.preventDefault();
     onClick(value!);
-
-    toast.promise(generateImage(value!), {
-      pending: "Your image is being generated 🤔",
-      success: "Yay, image has been rendered 🥳",
-      error: "Unfortunately, there has been an eror, please try again 😢",
-    });
+    if (status === "authenticated") {
+      toast.promise(generateImage(value!), {
+        pending: "Your image is being generated 🤔",
+        success: "Yay, image has been rendered 🥳",
+        error: "Unfortunately, there has been an eror, please try again 😢",
+      });
+    } else if (status === "unauthenticated") {
+      toast(<p>You are not logged in, please login to generate images.</p>, {
+        type: "info",
+        ...toastConfig,
+      });
+    }
   };
   useEffect(() => {
     textRef.current!.value = prompt;
