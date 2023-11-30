@@ -3,11 +3,13 @@ import React from "react";
 import Wrapper from "../wrapper";
 import Link from "next/link";
 import logo from "@/assets/logo-small.png";
-import AuthSession from "./authSession";
+import ToggleLink from "./ToggleLink";
+import { SessionProvider } from "next-auth/react";
+// import { usePathname } from "next/navigation";
 type Props = {};
 
 function Header({}: Props) {
-  const pathname = false;
+  const pathname = true;
   const active = "after:scale-100";
   const inactive = "after:scale-0";
   return (
@@ -40,13 +42,13 @@ function Header({}: Props) {
           <li className="flex gap-4 ">
             <Link
               className={`font-medium relative after:content-[''] opacity-100 hover:opacity-70  transition-opacity ease-in duration-200  after:absolute after:w-full after:h-[2px] after:transition-all after:duration-200 after:ease-in  ${
-                pathname === false ? active : inactive
+                pathname ? active : inactive
               }    after:left-0 after:right-0 after:top-[24px] after:bg-white hover:after:scale-50`}
               href={"/about"}
             >
               About
             </Link>
-            <AuthSession />
+            <ToggleLink />
           </li>
         </ul>
         <p className="text mt-10">
