@@ -24,14 +24,13 @@ export const option: NextAuthOptions = {
           credentials?.password!,
           user?.password
         );
-        console.log({ user, passwordCheck });
         if (passwordCheck) {
           return {
             id: user?.id,
             email: user?.email,
           };
         }
-        console.log({ credentials });
+        //  console.log({ credentials });
 
         return null;
       },

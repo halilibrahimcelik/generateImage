@@ -11,7 +11,6 @@ const RegisterForm = (props: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(formData.get("email"), formData.get("password"));
     await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({
@@ -21,12 +20,10 @@ const RegisterForm = (props: Props) => {
     }).then(async (res) => {
       if (!res.ok) {
         return res.json().then((data: ZodError) => {
-          console.log(data.issues[0].message);
           toast(data.issues[0].message, { ...toastConfig, type: "error" });
         });
       } else {
         return res.json().then((data) => {
-          console.log(data);
           toast(
             <div className="w-full">
               <p className="font-xl">{data.message}</p>
