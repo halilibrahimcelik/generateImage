@@ -7,7 +7,6 @@ import PromptTag from "@/components/prompTag";
 import Wrapper from "@/components/wrapper";
 import { useMainContext } from "@/hooks/useMain";
 import { SessionProvider } from "next-auth/react";
-import React, { useEffect } from "react";
 import { PuffLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 
