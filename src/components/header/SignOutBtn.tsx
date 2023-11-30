@@ -1,10 +1,9 @@
 "use client";
-import React from "react";
 import { signOut } from "next-auth/react";
 
 type Props = {};
 
-const SignOut = (props: Props) => {
+const SignOutBtn = (props: Props) => {
   const handleSignOut = () => {
     signOut();
   };
@@ -18,4 +17,4 @@ const SignOut = (props: Props) => {
   );
 };
 
-export default SignOut;
+export default SignOutBtn;
