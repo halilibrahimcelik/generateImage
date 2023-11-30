@@ -9,7 +9,6 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(formData.get("email"), formData.get("password"));
     const response = await signIn("credentials", {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
@@ -35,7 +34,6 @@ const LoginForm = () => {
         });
       }
     });
-    console.log({ response });
   };
   return (
     <form

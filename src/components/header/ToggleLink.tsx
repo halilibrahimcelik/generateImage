@@ -9,7 +9,6 @@ type Props = {};
 const ToggleLink = async (props: Props) => {
   const session = await getServerSession();
 
-  console.log({ session });
   return (
     <>
       {session ? (
