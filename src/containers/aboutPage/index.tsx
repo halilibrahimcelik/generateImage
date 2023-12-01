@@ -1,3 +1,4 @@
+import ContactForm from "@/components/contactForm";
 import Wrapper from "@/components/wrapper";
 import React from "react";
 
@@ -23,6 +24,7 @@ const AboutPageContainer = (props: Props) => {
           </p>
         </article>
       </div>
+      <ContactForm />
     </Wrapper>
   );
 };

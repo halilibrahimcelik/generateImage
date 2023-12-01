@@ -111,7 +111,9 @@ body::before {
     margin: 5px;
     display: inline-block;
   }
-
+  .input-field {
+    @apply bg-transparent border-[#d8d7d786] border rounded-lg p-2 mb-2 resize-none  focus:shadow-sky-400   focus:outline-none    focus:shadow-[0_1px_6px_1px_rgba(0,0,0,0.1)];
+  }
   .gradient-box::before {
     content: "";
     position: absolute;
