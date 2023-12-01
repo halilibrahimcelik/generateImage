@@ -4,6 +4,7 @@ import { oswald, poppin } from "@/lib/fonts";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import "react-toastify/dist/ReactToastify.css";
+import HeaderWrapper from "@/components/header/HeaderWrapper";
 
 export const metadata: Metadata = {
   title: "Generate Image",
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppin.variable} ${oswald.variable}`}>
-        <Header />
+        <HeaderWrapper>
+          <Header />
+        </HeaderWrapper>
         {children}
         <Footer />
       </body>
