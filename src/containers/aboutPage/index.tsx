@@ -22,7 +22,7 @@ const AboutPageContainer = (props: Props) => {
           </div>
           <article className="grid gap-2">
             <p className="text">
-              Just Use your imagination, and we will generate image for you!
+              Just Use your imagination, and we handle the rest!{" "}
             </p>
             <p className="text">
               You have to register first, then you can freely visualize your

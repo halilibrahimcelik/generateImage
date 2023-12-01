@@ -46,7 +46,7 @@ const RegisterForm = (props: Props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 w-[40rem] lg:w-[50rem]"
+      className="flex flex-col gap-2 w-full  md:w-[40rem] lg:w-[50rem]"
     >
       <input
         className="text-black p-1 rounded-md"
