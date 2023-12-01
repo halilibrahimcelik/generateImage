@@ -1,9 +1,14 @@
+import AboutPageContainer from "@/containers/aboutPage";
 import React from "react";
 
 type Props = {};
 
-const page = (props: Props) => {
-  return <div>page</div>;
+const AboutPage = (props: Props) => {
+  return (
+    <>
+      <AboutPageContainer />
+    </>
+  );
 };
 
-export default page;
+export default AboutPage;
