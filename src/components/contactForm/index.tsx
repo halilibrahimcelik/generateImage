@@ -40,7 +40,7 @@ const ContactForm = (props: Props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col mx-auto w-full md:w-[80%] lg:w-[40rem] gradient-box "
+      className="flex flex-col mx-auto w-full md:w-[80%]  lg:m-0  gradient-box "
     >
       <input
         className="input-field "
