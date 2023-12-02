@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { Player } from "@lordicon/react";
 import Icon from "@/assets/icon.json";
 import gsap from "gsap";
+import { ToastContainer } from "react-toastify";
 type Props = {};
 
 const AboutPageContainer = (props: Props) => {
@@ -39,7 +40,7 @@ const AboutPageContainer = (props: Props) => {
         <div className="flex flex-col gap-4 briefing ">
           <div className="flex gap-2">
             <h2 className="text-2xl">Welcome Back </h2>
-            <Player ref={playerRef} icon={Icon} />
+            {/* <Player ref={playerRef} icon={Icon} /> */}
           </div>
           <article className="grid gap-2">
             <p className="text">
@@ -60,6 +61,19 @@ const AboutPageContainer = (props: Props) => {
           <ContactForm />
         </div>
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </Wrapper>
   );
 };
