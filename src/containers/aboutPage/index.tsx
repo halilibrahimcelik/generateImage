@@ -1,10 +1,11 @@
 "use client";
 import ContactForm from "@/components/contactForm";
 import Wrapper from "@/components/wrapper";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { useEffect, useRef } from "react";
 import { Player } from "@lordicon/react";
 import Icon from "@/assets/icon.json";
+import gsap from "gsap";
 type Props = {};
 
 const AboutPageContainer = (props: Props) => {
@@ -12,10 +13,30 @@ const AboutPageContainer = (props: Props) => {
   useEffect(() => {
     playerRef.current?.playFromBeginning();
   }, []);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".briefing", {
+        x: 100,
+        opacity: 0,
+        duration: 0.3,
+        delay: 0.3,
+        ease: "sine.in",
+      });
+      gsap.from(".contact-form", {
+        x: -100,
+        opacity: 0,
+        duration: 0.3,
+        delay: 0.3,
+        ease: "sine.in",
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
   return (
     <Wrapper tag="section" customClass="h-auto">
-      <div className="grid grid-cols-1  py-10 lg:grid-cols-2 gap-2 lg:justify-items-end">
-        <div className="flex flex-col gap-4">
+      <div className="grid grid-cols-1 gap-10  py-10 lg:grid-cols-2 lg:gap-2 lg:justify-items-end">
+        <div className="flex flex-col gap-4 briefing ">
           <div className="flex gap-2">
             <h2 className="text-2xl">Welcome Back </h2>
             <Player ref={playerRef} icon={Icon} />
@@ -35,7 +56,9 @@ const AboutPageContainer = (props: Props) => {
             </p>
           </article>
         </div>
-        <ContactForm />
+        <div className="contact-form w-full flex items-end justify-end">
+          <ContactForm />
+        </div>
       </div>
     </Wrapper>
   );

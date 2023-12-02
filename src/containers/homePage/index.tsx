@@ -42,7 +42,7 @@ const HomePageContainer = (props: Props) => {
         scrollTrigger: {
           trigger: ".examples",
           scrub: 0,
-          markers: true,
+          markers: false,
         },
       });
     });
