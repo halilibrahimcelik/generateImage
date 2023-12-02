@@ -34,7 +34,7 @@ const AboutPageContainer = (props: Props) => {
     return () => ctx.revert();
   }, []);
   return (
-    <Wrapper tag="section" customClass="h-auto">
+    <Wrapper tag="section" customClass="min-h-[60vh]">
       <div className="grid grid-cols-1 gap-10  py-10 lg:grid-cols-2 lg:gap-2 lg:justify-items-end">
         <div className="flex flex-col gap-4 briefing ">
           <div className="flex gap-2">
