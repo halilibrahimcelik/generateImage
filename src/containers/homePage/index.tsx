@@ -9,17 +9,56 @@ import { useMainContext } from "@/hooks/useMain";
 import { SessionProvider } from "next-auth/react";
 import { PuffLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
-
+import gsap from "gsap";
+import { useLayoutEffect } from "react";
+import { ScrollTrigger } from "gsap/all";
 type Props = {};
 
 const HomePageContainer = (props: Props) => {
   const { loading } = useMainContext();
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      gsap.from(".form-area", {
+        x: 100,
+        opacity: 0,
+        duration: 0.3,
+        delay: 0.3,
+        ease: "sine.in",
+      });
+      gsap.from(".promp-tag", {
+        opacity: 0,
+        duration: 0.3,
+        delay: 0.3,
+        ease: "sine.in",
+      });
+      gsap.from(".test", {
+        opacity: 0,
+        scale: 0.7,
+
+        overflow: "hidden",
+        duration: 0.4,
+        start: "top top",
+        scrollTrigger: {
+          trigger: ".examples",
+          scrub: 0,
+          markers: false,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <SessionProvider>
       <Wrapper tag="section">
-        <Form />
-        <PromptTag />
+        <div className="form-area">
+          <Form />
+        </div>
+        <div className="promp-tag">
+          <PromptTag />
+        </div>
         {loading ? (
           <div className="flex flex-col items-center justify-center gap-2">
             <PuffLoader
@@ -35,7 +74,9 @@ const HomePageContainer = (props: Props) => {
         ) : (
           <PredictedImage />
         )}
-        <ExampleImages />
+        <div className="test examples">
+          <ExampleImages />
+        </div>
 
         <ToastContainer
           position="top-right"
