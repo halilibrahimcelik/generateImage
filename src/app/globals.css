@@ -87,7 +87,12 @@ body::before {
   animation: skeleton 1.5s infinite;
   content: "";
 }
+.header-scrolled {
+  position: fixed;
+  width: 100%;
 
+
+}
 @keyframes skeleton {
   0% {
     transform: translateX(-100%);
