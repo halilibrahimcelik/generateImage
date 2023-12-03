@@ -12,18 +12,7 @@ const HeaderWrapper = ({ children }: Props) => {
 
   useLayoutEffect(() => {
     const header = headerRef.current!;
-    const backgroundTween = gsap.to(header, {
-      backgroundColor: "rgba(49, 48, 48, 0.9821428571428571)",
-      width: "100%",
-      backgroundImage: `
-        linear-gradient(
-          180deg,
-          rgba(49, 48, 48, 0.9821428571428571) 100%,
-          rgba(136, 119, 119, 0) 0%
-        )
-      `,
-      ease: "power2.inOut",
-    });
+
     const ctx = gsap.context(() => {
       gsap.from("header", {
         y: -50,
@@ -33,25 +22,39 @@ const HeaderWrapper = ({ children }: Props) => {
         ease: "power2.in",
       });
     });
-    ScrollTrigger.create({
-      start: 200,
+    const timeline = ScrollTrigger.create({
+      start: 250,
 
       onToggle: ({ isActive }) => {
         if (isActive) {
           header.classList.add("header-scrolled");
-
-          backgroundTween.play();
+          gsap.to(header, {
+            backgroundColor: "rgba(49, 48, 48, 0.9821428571428571)",
+            width: "100%",
+            backgroundImage: `
+            linear-gradient(180deg, rgba(10,8,34,1) 0%, rgba(150,156,157,0) 100%)
+            `,
+            ease: "power2.inOut",
+            filter: "drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.25))",
+          });
+          //    backgroundTween.play();
         } else {
           header.classList.remove("header-scrolled");
-
-          backgroundTween.reverse();
+          gsap.to(header, {
+            backgroundColor: "transparent",
+            width: "100%",
+            backgroundImage: "none",
+            ease: "power2.inOut",
+            filter: "none",
+          });
+          // backgroundTween.reverse();
         }
       },
     });
 
     return () => {
       ctx.revert();
-      backgroundTween.kill();
+      timeline.kill();
     };
   }, []);
 
