@@ -4,9 +4,8 @@ import { ZodError } from "zod";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { toastConfig } from "@/lib/utils";
-import { signIn } from "next-auth/react";
-import googleIcon from "@/assets/google.png";
-import Image from "next/image";
+import GoogleAuthBtn from "../googleAuth";
+
 type Props = {};
 
 const RegisterForm = (props: Props) => {
@@ -45,9 +44,6 @@ const RegisterForm = (props: Props) => {
       }
     });
   };
-  const handleGoogleRegister = async () => {
-    await signIn("google", { callbackUrl: "/" });
-  };
 
   return (
     <div>
@@ -75,12 +71,7 @@ const RegisterForm = (props: Props) => {
           Register
         </button>
       </form>
-      <div className="flex flex-col justify-center items-center gap-2 w-full  md:w-[40rem] lg:w-[50rem]">
-        <p className="text-center">You can also Register with Google</p>
-        <button onClick={handleGoogleRegister}>
-          <Image src={googleIcon} width={48} height={48} alt="Google logoa" />
-        </button>
-      </div>
+      <GoogleAuthBtn />
     </div>
   );
 };

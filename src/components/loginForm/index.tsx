@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { toastConfig } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import GoogleAuthBtn from "../googleAuth";
 const LoginForm = () => {
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,26 +37,29 @@ const LoginForm = () => {
     });
   };
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 mb-20 w-full md:w-[40rem] lg:w-[50rem]"
-    >
-      <input
-        className="text-black px-1 py-2  rounded-md"
-        placeholder="Email..."
-        type="email"
-        name="email"
-      />
-      <input
-        className="text-black  px-1 py-2 rounded-md"
-        placeholder="Password..."
-        type="password"
-        name="password"
-      />
-      <button type="submit" className="btn-primary px-6 py-1 mx-auto w-fit">
-        Login
-      </button>
-    </form>
+    <div className="mb-20">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 w-full md:w-[40rem] lg:w-[50rem]"
+      >
+        <input
+          className="text-black px-1 py-2  rounded-md"
+          placeholder="Email..."
+          type="email"
+          name="email"
+        />
+        <input
+          className="text-black  px-1 py-2 rounded-md"
+          placeholder="Password..."
+          type="password"
+          name="password"
+        />
+        <button type="submit" className="btn-primary px-6 py-1 mx-auto w-fit">
+          Login
+        </button>
+      </form>
+      <GoogleAuthBtn />
+    </div>
   );
 };
 
