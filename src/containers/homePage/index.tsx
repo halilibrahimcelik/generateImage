@@ -11,13 +11,11 @@ import { PuffLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 import gsap from "gsap";
 import { useLayoutEffect } from "react";
-import { ScrollTrigger } from "gsap/all";
 type Props = {};
 
 const HomePageContainer = (props: Props) => {
   const { loading } = useMainContext();
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.from(".form-area", {
         x: 100,
@@ -32,7 +30,7 @@ const HomePageContainer = (props: Props) => {
         delay: 0.3,
         ease: "sine.in",
       });
-      gsap.from(".test", {
+      gsap.from(".example-wrapper", {
         opacity: 0,
         scale: 0.7,
 
@@ -74,7 +72,7 @@ const HomePageContainer = (props: Props) => {
         ) : (
           <PredictedImage />
         )}
-        <div className="test examples">
+        <div className="example-wrapper examples">
           <ExampleImages />
         </div>
 

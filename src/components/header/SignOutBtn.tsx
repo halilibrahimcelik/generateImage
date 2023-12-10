@@ -4,8 +4,16 @@ import { signOut } from "next-auth/react";
 type Props = {};
 
 const SignOutBtn = (props: Props) => {
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    const res = await fetch("/api/auth/delete-cookie", {
+      method: "POST",
+      body: JSON.stringify({ cookieName: "access_token" }),
+    });
+    if (res.ok) {
+      signOut();
+    }
+    const data = await res.json();
+    console.log(data);
   };
   return (
     <button

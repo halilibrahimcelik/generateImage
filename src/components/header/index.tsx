@@ -34,7 +34,7 @@ function Header({}: Props) {
           <ToggleLink />
         </li>
       </ul>
-      <p className="text mt-10">
+      <p className="text mt-5">
         Tell us what is in your mind and we will generature image for you!{" "}
       </p>
     </Wrapper>
