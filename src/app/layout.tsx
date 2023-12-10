@@ -19,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppin.variable} ${oswald.variable}`}>
+      <body
+        suppressHydrationWarning={true}
+        className={`${poppin.variable} ${oswald.variable} relative`}
+      >
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>

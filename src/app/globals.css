@@ -87,10 +87,27 @@ body::before {
   animation: skeleton 1.5s infinite;
   content: "";
 }
-.header-scrolled {
-  position: fixed;
+.header {
+  background: transparent;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* position: sticky; */
   width: 100%;
   z-index: 100;
+  transition: all 0.3s ease-in-out;
+  height: 120px;
+  margin-bottom: 120px;
+}
+.header-scrolled {
+  background: rgb(49, 48, 48);
+  filter: drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.25));
+
+  background: linear-gradient(
+    180deg,
+    rgba(10, 8, 34, 1) 68%,
+    rgba(150, 156, 157, 0) 100%
+  ) !important;
 }
 @keyframes skeleton {
   0% {

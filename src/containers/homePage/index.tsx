@@ -11,13 +11,11 @@ import { PuffLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 import gsap from "gsap";
 import { useLayoutEffect } from "react";
-import { ScrollTrigger } from "gsap/all";
 type Props = {};
 
 const HomePageContainer = (props: Props) => {
   const { loading } = useMainContext();
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.from(".form-area", {
         x: 100,

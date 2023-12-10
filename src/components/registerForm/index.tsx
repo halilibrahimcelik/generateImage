@@ -4,6 +4,9 @@ import { ZodError } from "zod";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { toastConfig } from "@/lib/utils";
+import { signIn } from "next-auth/react";
+import googleIcon from "@/assets/google.png";
+import Image from "next/image";
 type Props = {};
 
 const RegisterForm = (props: Props) => {
@@ -42,32 +45,43 @@ const RegisterForm = (props: Props) => {
       }
     });
   };
+  const handleGoogleRegister = async () => {
+    await signIn("google", { callbackUrl: "/" });
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-2 w-full  md:w-[40rem] lg:w-[50rem]"
-    >
-      <input
-        className="text-black p-1 rounded-md"
-        placeholder="Email..."
-        type="email"
-        name="email"
-        required
-      />
-      <input
-        className="text-black p-1 rounded-md"
-        placeholder="Password..."
-        type="password"
-        name="password"
-        required
-        min={4}
-        max={100}
-      />
-      <button type="submit" className="btn-primary p-1 mx-auto w-fit">
-        Register
-      </button>
-    </form>
+    <div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 w-full  md:w-[40rem] lg:w-[50rem]"
+      >
+        <input
+          className="text-black p-1 rounded-md"
+          placeholder="Email..."
+          type="email"
+          name="email"
+          required
+        />
+        <input
+          className="text-black p-1 rounded-md"
+          placeholder="Password..."
+          type="password"
+          name="password"
+          required
+          min={4}
+          max={100}
+        />
+        <button type="submit" className="btn-primary p-1 mx-auto w-fit">
+          Register
+        </button>
+      </form>
+      <div className="flex flex-col justify-center items-center gap-2 w-full  md:w-[40rem] lg:w-[50rem]">
+        <p className="text-center">You can also Register with Google</p>
+        <button onClick={handleGoogleRegister}>
+          <Image src={googleIcon} width={48} height={48} alt="Google logoa" />
+        </button>
+      </div>
+    </div>
   );
 };
 
