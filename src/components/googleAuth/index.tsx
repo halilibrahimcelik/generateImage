@@ -18,7 +18,10 @@ const GoogleAuthBtn = (props: Props) => {
           ? "or login with Google"
           : "or register with Google"}
       </p>
-      <button onClick={handleGoogleRegister}>
+      <button
+        className="hover:scale-105 duration-200 transition-all ease-in  opacity-75 hover:opacity-100 hover:-hue-rotate-15 bg-blend-luminosity "
+        onClick={handleGoogleRegister}
+      >
         <Image src={googleIcon} width={48} height={48} alt="Google logoa" />
       </button>
     </div>
