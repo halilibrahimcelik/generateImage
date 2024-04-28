@@ -38,7 +38,6 @@ const ContactForm = (props: Props) => {
       )
       .then(
         (result) => {
-          console.log(result.text);
           if (result.text === "OK") {
             toast("Your message has been sent successfully. Thank you!", {
               type: "success",

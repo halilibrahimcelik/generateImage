@@ -10,7 +10,6 @@ const Form = (props: Props) => {
   const { onClick, prompt, generateImage, setLoading, loading } =
     useMainContext();
   const { data: session, status } = useSession();
-  console.log(session);
   const textRef = React.useRef<HTMLTextAreaElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const value = textRef.current?.value;
