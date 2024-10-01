@@ -1,44 +1,44 @@
-"use client";
-import ExampleImages from "@/components/exampleImage";
-import Form from "@/components/form";
-import PredictedImage from "@/components/predictedImage";
-import PredictLoading from "@/components/predictedImage/loading";
-import PromptTag from "@/components/prompTag";
-import Wrapper from "@/components/wrapper";
-import { useMainContext } from "@/hooks/useMain";
-import { SessionProvider } from "next-auth/react";
-import { PuffLoader } from "react-spinners";
-import { ToastContainer } from "react-toastify";
-import gsap from "gsap";
-import { useLayoutEffect } from "react";
+'use client';
+import ExampleImages from '@/components/exampleImage';
+import Form from '@/components/form';
+import PredictedImage from '@/components/predictedImage';
+import PredictLoading from '@/components/predictedImage/loading';
+import PromptTag from '@/components/prompTag';
+import Wrapper from '@/components/wrapper';
+import { useMainContext } from '@/hooks/useMain';
+import { SessionProvider } from 'next-auth/react';
+import { PuffLoader } from 'react-spinners';
+import { ToastContainer } from 'react-toastify';
+import gsap from 'gsap';
+import { useLayoutEffect } from 'react';
 type Props = {};
 
 const HomePageContainer = (props: Props) => {
   const { loading } = useMainContext();
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".form-area", {
+      gsap.from('.form-area', {
         x: 100,
         opacity: 0,
         duration: 0.3,
         delay: 0.3,
-        ease: "sine.in",
+        ease: 'sine.in',
       });
-      gsap.from(".promp-tag", {
+      gsap.from('.promp-tag', {
         opacity: 0,
         duration: 0.3,
         delay: 0.3,
-        ease: "sine.in",
+        ease: 'sine.in',
       });
-      gsap.from(".example-wrapper", {
+      gsap.from('.example-wrapper', {
         opacity: 0,
         scale: 0.7,
 
-        overflow: "hidden",
+        overflow: 'hidden',
         duration: 0.4,
-        start: "top top",
+        start: 'top top',
         scrollTrigger: {
-          trigger: ".examples",
+          trigger: '.examples',
           scrub: 0,
           markers: false,
         },
@@ -50,34 +50,34 @@ const HomePageContainer = (props: Props) => {
 
   return (
     <SessionProvider>
-      <Wrapper tag="section">
-        <div className="form-area">
+      <Wrapper tag='section'>
+        <div className='form-area'>
           <Form />
         </div>
-        <div className="promp-tag">
+        <div className='promp-tag'>
           <PromptTag />
         </div>
         {loading ? (
-          <div className="flex flex-col items-center justify-center gap-2">
+          <div className='flex flex-col items-center justify-center gap-2'>
             <PuffLoader
               size={100}
               cssOverride={{
-                animation: "ease-in",
-                backgroundColor: "transparent",
+                animation: 'ease-in',
+                backgroundColor: 'transparent',
               }}
-              color="#e3e3e3"
+              color='#e3e3e3'
             />
             <PredictLoading />
           </div>
         ) : (
           <PredictedImage />
         )}
-        <div className="example-wrapper examples">
+        <div className='example-wrapper examples'>
           <ExampleImages />
         </div>
 
         <ToastContainer
-          position="top-right"
+          position='top-right'
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -86,7 +86,7 @@ const HomePageContainer = (props: Props) => {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="dark"
+          theme='dark'
         />
       </Wrapper>
     </SessionProvider>

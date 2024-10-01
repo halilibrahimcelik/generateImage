@@ -1,20 +1,20 @@
-import type { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { compare } from "bcrypt";
-import { sql } from "@vercel/postgres";
-import GoogleProvider from "next-auth/providers/google";
+import type { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { compare } from 'bcrypt';
+import { sql } from '@vercel/postgres';
+import GoogleProvider from 'next-auth/providers/google';
 
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 export const option: NextAuthOptions = {
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
 
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
-      name: "Credentials",
+      name: 'Credentials',
 
       credentials: {
         email: {},
@@ -59,10 +59,10 @@ export const option: NextAuthOptions = {
     async session({ session, token, user, newSession }) {
       // Modify the session object
       session.user = token;
-
+      console.log(session);
       cookies().set({
-        name: "access_token",
-        value: "lee",
+        name: 'access_token',
+        value: 'lee',
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 7, // 1 week
       });
