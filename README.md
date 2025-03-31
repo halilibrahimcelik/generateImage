@@ -35,11 +35,6 @@ This Next.js project enables users to generate photorealistic images using a sta
 - [GSAP](https://greensock.com/gsap/)
 - [React Context API](https://reactjs.org/docs/context.html)
 
-## Getting Started
-
-### Prerequisites
-
-[Include any prerequisites or dependencies that users need to install before running your project.]
 
 ### Installation
 
